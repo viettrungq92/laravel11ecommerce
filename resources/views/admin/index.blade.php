@@ -266,102 +266,103 @@
 
 @push('scripts')
 
-<script>
-        (function ($) {
+    <script>
+            (function ($) {
 
-            var tfLineChart = (function () {
+                var tfLineChart = (function () {
 
-                var chartBar = function () {
+                    var chartBar = function () {
 
-                    var options = {
-                        series: [{
-                            name: 'Total',
-                            data: [{{$AmountM}}]
-                        }, {
-                            name: 'Pending',
-                            data: [{{$OrderedAmountM}}]
-                        },
-                        {
-                            name: 'Delivered',
-                            data: [{{$DeliveredAmountM}}]
-                        }, {
-                            name: 'Canceled',
-                            data: [{{$CanceledAmountM}}]
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 325,
-                            toolbar: {
-                                show: false,
+                        var options = {
+                            series: [{
+                                name: 'Total',
+                                data: [{{$AmountM}}]
+                            }, {
+                                name: 'Pending',
+                                data: [{{$OrderedAmountM}}]
                             },
-                        },
-                        plotOptions: {
-                            bar: {
-                                horizontal: false,
-                                columnWidth: '10px',
-                                endingShape: 'rounded'
-                            },
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        legend: {
-                            show: false,
-                        },
-                        colors: ['#2377FC', '#FFA500', '#078407', '#FF0000'],
-                        stroke: {
-                            show: false,
-                        },
-                        xaxis: {
-                            labels: {
-                                style: {
-                                    colors: '#212529',
+                            {
+                                name: 'Delivered',
+                                data: [{{$DeliveredAmountM}}]
+                            }, {
+                                name: 'Canceled',
+                                data: [{{$CanceledAmountM}}]
+                            }],
+                            chart: {
+                                type: 'bar',
+                                height: 325,
+                                toolbar: {
+                                    show: false,
                                 },
                             },
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        yaxis: {
-                            show: false,
-                        },
-                        fill: {
-                            opacity: 1
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function (val) {
-                                    return "$ " + val + ""
+                            plotOptions: {
+                                bar: {
+                                    horizontal: false,
+                                    columnWidth: '10px',
+                                    endingShape: 'rounded'
+                                },
+                            },
+                            dataLabels: {
+                                enabled: false
+                            },
+                            legend: {
+                                show: false,
+                            },
+                            colors: ['#2377FC', '#FFA500', '#078407', '#FF0000'],
+                            stroke: {
+                                show: false,
+                            },
+                            xaxis: {
+                                labels: {
+                                    style: {
+                                        colors: '#212529',
+                                    },
+                                },
+                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                            },
+                            yaxis: {
+                                show: false,
+                            },
+                            fill: {
+                                opacity: 1
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function (val) {
+                                        return "$ " + val + ""
+                                    }
                                 }
                             }
+                        };
+
+                        chart = new ApexCharts(
+                            document.querySelector("#line-chart-8"),
+                            options
+                        );
+                        if ($("#line-chart-8").length > 0) {
+                            chart.render();
                         }
                     };
 
-                    chart = new ApexCharts(
-                        document.querySelector("#line-chart-8"),
-                        options
-                    );
-                    if ($("#line-chart-8").length > 0) {
-                        chart.render();
-                    }
-                };
+                    /* Function ============ */
+                    return {
+                        init: function () { },
 
-                /* Function ============ */
-                return {
-                    init: function () { },
+                        load: function () {
+                            chartBar();
+                        },
+                        resize: function () { },
+                    };
+                })();
 
-                    load: function () {
-                        chartBar();
-                    },
-                    resize: function () { },
-                };
-            })();
+                jQuery(document).ready(function () { });
 
-            jQuery(document).ready(function () { });
+                jQuery(window).on("load", function () {
+                    tfLineChart.load();
+                });
 
-            jQuery(window).on("load", function () {
-                tfLineChart.load();
-            });
+                jQuery(window).on("resize", function () { });
+            })(jQuery);
+    </script>
 
-            jQuery(window).on("resize", function () { });
-        })(jQuery);
-</script>
 @endpush
