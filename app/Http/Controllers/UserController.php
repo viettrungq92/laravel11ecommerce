@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -41,4 +43,11 @@ class UserController extends Controller
         $order->save();
         return back()->with('status',"Order has been cancelled successfully!");
     }
+
+    public function addresses(){
+        $address = Address::where('user_id',Auth::user()->id)->where('isdefault',1)->first();
+        return view('user.addresses',compact('address'));
+    }
+
+    
 }

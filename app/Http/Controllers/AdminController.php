@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Contact;
@@ -12,9 +13,12 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Slide;
 use App\Models\Transaction;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -605,4 +609,62 @@ class AdminController extends Controller
         $contact->delete();
         return redirect()->route('admin.contacts')->with("status","Contact deleted successfully!");
     }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+        $results = Product::where('name','LIKE',"%{$query}%")->get()->take(8);
+        return response()->json($results);
+    }
+
+    public function users(){
+        $users = User::orderBy('id','DESC')->paginate(10);
+        return view('admin.users', compact('users'));
+    }
+
+    public function user_edit($id){
+        $user = User::find($id);
+        return view('admin.user-edit', compact('user'));
+    }
+
+    
+
+    public function user_delete($id)
+    {
+        $user = User::find($id);
+        if(File::exists(public_path('uploads/users').'/'.$user->image)){
+            File::delete(public_path('uploads/users').'/'.$user->image);
+        }
+        $user->delete();
+        return redirect()->route('admin.users')->with('status','User has been deleted successfully!');
+    }
+    public function setting(){
+        return view('admin.setting');
+    }
+    public function setting_update(Request $request){
+        $request->validate([
+            'name' => 'required|max:100',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:10',
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed|min:8',
+
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        // Check old password
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Password is wrong.']);
+        }
+        else{
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+    
+            return back()->with('success', 'The password has been changed successfully!');
+        }
+        // Update password
+        
+    }
 }
+

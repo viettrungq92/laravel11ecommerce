@@ -35,7 +35,7 @@ Route::delete('/wishlist/clear',[WishlistController::class,'empty_wishlist'])->n
 Route::post('/wishlist/move-to-cart/{rowId}',[WishlistController::class,'move_to_cart'])->name('wishlist.move.to.cart');
 
 Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
-Route::post('/plac-an-order',[CartController::class,'place_an_order'])->name('cart.place.an.order');
+Route::post('/place-an-order',[CartController::class,'place_an_order'])->name('cart.place.an.order');
 Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->name('cart.order.confirmation');
 
 Route::get('/contact-us',[HomeController::class,'contact'])->name('home.contact');
@@ -43,11 +43,18 @@ Route::post('/contact/store',[HomeController::class,'contact_store'])->name('hom
 
 Route::get('/search',[HomeController::class,'search'])->name('home.search');
 
+Route::get('/about-us',[HomeController::class,'about'])->name('home.about');
+
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/account-dashboard', [UserController::class,'index'])->name('user.index');
     Route::get('/account-orders',[UserController::class,'orders'])->name('user.orders');
     Route::get('/account-order/{order_id}/details',[UserController::class,'order_details'])->name('user.order.details');
     Route::put('/account-order/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
+
+    Route::get('/account-addresses',[UserController::class,'addresses'])->name('user.addresses');
+    Route::get('/account-account/details',[UserController::class,'account_details'])->name('user.account.details');
 });
 
 Route::middleware(['auth',AuthAdmin::class])->group(function () {
@@ -93,4 +100,13 @@ Route::middleware(['auth',AuthAdmin::class])->group(function () {
 
     Route::get('/admin/contact',[AdminController::class,'contacts'])->name('admin.contacts');
     Route::delete('/admin/contact/{id}/delete',[AdminController::class,'contact_delete'])->name('admin.contact.delete');
+
+    Route::get('/admin/search',[AdminController::class,'search'])->name('admin.search');
+
+    Route::get('/admin/user-control',[AdminController::class,'users'])->name('admin.users');
+    Route::get('/admin/user/edit/{id}',[AdminController::class,'user_edit'])->name('admin.user.edit');
+    Route::put('/admin/user/update',[AdminController::class,'user_update'])->name('admin.user.update');
+    Route::delete('/admin/user/{id}/delete',[AdminController::class,'user_delete'])->name('admin.user.delete');
+
+    Route::get('/admin/setting-account',[AdminController::class,'setting'])->name('admin.setting');
 });
