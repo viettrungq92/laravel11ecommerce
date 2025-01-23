@@ -9,10 +9,10 @@
           <ul class="account-nav">
             <li><a href="my-account.html" class="menu-link menu-link_us-s menu-link_active">Dashboard</a></li>
             <li><a href="account-orders.html" class="menu-link menu-link_us-s">Orders</a></li>
-            <li><a href="account-address.html" class="menu-link menu-link_us-s">Addresses</a></li>
-            <li><a href="account-details.html" class="menu-link menu-link_us-s">Account Details</a></li>
+            <li><a href="{{route('user.addresses')}}" class="menu-link menu-link_us-s">Addresses</a></li>
+            <li><a href="{{route('user.account.details')}}" class="menu-link menu-link_us-s">Account Details</a></li>
             <li><a href="account-wishlist.html" class="menu-link menu-link_us-s">Wishlist</a></li>
-            <li><a href="login.html" class="menu-link menu-link_us-s">Logout</a></li>
+            <li><a href="{{ route('logout') }}" class="menu-link menu-link_us-s">Logout</a></li>
           </ul>
         </div>
         <div class="col-lg-9">

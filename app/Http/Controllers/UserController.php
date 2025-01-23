@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -49,5 +50,30 @@ class UserController extends Controller
         return view('user.addresses',compact('address'));
     }
 
+    public function account_details(){
+        return view('user.account-details');
+    }
+    public function setting_update(Request $request){
+        $request->validate([
+            'name' => 'required|max:100',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric|digits:10',
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed|min:8',
+
+        ]);
+        $user = Auth::User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+        // Check old password
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Password is wrong.']);
+        }        
+            $user->password = Hash::make($request->new_password);
+            $user->save();
     
+            return back()->with('success', 'The password has been changed successfully!');
+
+    }
 }

@@ -34,32 +34,36 @@
             <div class="col-lg-12">
                 <div class="page-content my-account__edit">
                     <div class="my-account__edit-form">
-                        <form name="account_edit_form" action="#" method="POST"
+                        <form name="account_edit_form" action="{{route('admin.setting.update')}}" method="POST"
                             class="form-new-product form-style-1 needs-validation"
                             novalidate="">
+                        @csrf
 
                             <fieldset class="name">
                                 <div class="body-title">Name <span class="tf-color-1">*</span>
                                 </div>
                                 <input class="flex-grow" type="text" placeholder="Full Name"
-                                    name="name" tabindex="0" value="" aria-required="true"
+                                    name="name" tabindex="0" value="{{old('name')}}" aria-required="true"
                                     required="">
+                                @error('name') <span class="text-danger">{{$message}}</span> @enderror
                             </fieldset>
 
-                            <fieldset class="name">
+                            <fieldset class="mobile">
                                 <div class="body-title">Mobile Number <span
                                         class="tf-color-1">*</span></div>
                                 <input class="flex-grow" type="text" placeholder="Mobile Number"
-                                    name="mobile" tabindex="0" value="" aria-required="true"
+                                    name="mobile" tabindex="0" value="{{old('mobile')}}" aria-required="true"
                                     required="">
+                                    @error('mobile') <span class="text-danger">{{$message}}</span> @enderror
                             </fieldset>
 
-                            <fieldset class="name">
+                            <fieldset class="email">
                                 <div class="body-title">Email Address <span
                                         class="tf-color-1">*</span></div>
                                 <input class="flex-grow" type="text" placeholder="Email Address"
-                                    name="email" tabindex="0" value="" aria-required="true"
+                                    name="email" tabindex="0" value="{{old('email')}}" aria-required="true"
                                     required="">
+                                    @error('email') <span class="text-danger">{{$message}}</span> @enderror
                             </fieldset>
 
                             <div class="row">
@@ -69,31 +73,33 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <fieldset class="name">
+                                    <fieldset class="form-control">
                                         <div class="body-title pb-3">Old password <span
                                                 class="tf-color-1">*</span>
                                         </div>
-                                        <input class="flex-grow" type="password"
+                                        <input class="flex-grow" type="text"
                                             placeholder="Old password" id="old_password"
-                                            name="old_password" aria-required="true"
+                                            name="old_password"
                                             required="">
+                                            @error('old_password') <span class="text-danger">{{$message}}</span> @enderror
                                     </fieldset>
 
                                 </div>
                                 <div class="col-md-12">
-                                    <fieldset class="name">
+                                    <fieldset class="form-control">
                                         <div class="body-title pb-3">New password <span
                                                 class="tf-color-1">*</span>
                                         </div>
-                                        <input class="flex-grow" type="password"
+                                        <input class="flex-grow" type="text"
                                             placeholder="New password" id="new_password"
-                                            name="new_password" aria-required="true"
+                                            name="new_password"
                                             required="">
+                                            @error('new_password') <span class="text-danger">{{$message}}</span> @enderror
                                     </fieldset>
 
                                 </div>
                                 <div class="col-md-12">
-                                    <fieldset class="name">
+                                    <fieldset class="form-control">
                                         <div class="body-title pb-3">Confirm new password <span
                                                 class="tf-color-1">*</span></div>
                                         <input class="flex-grow" type="password"
@@ -101,9 +107,12 @@
                                             data-cf-pwd="#new_password"
                                             id="new_password_confirmation"
                                             name="new_password_confirmation"
-                                            aria-required="true" required="">
+                                            required="">
                                         <div class="invalid-feedback">Passwords did not match!
                                         </div>
+                                        
+                                        
+                                        @error('new_password_confirmation') <span class="text-danger">{{$message}}</span> @enderror
                                     </fieldset>
                                 </div>
                                 <div class="col-md-12">

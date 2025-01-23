@@ -54,7 +54,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/account-order/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
 
     Route::get('/account-addresses',[UserController::class,'addresses'])->name('user.addresses');
-    Route::get('/account-account/details',[UserController::class,'account_details'])->name('user.account.details');
+    
+    Route::get('/account-details',[UserController::class,'account_details'])->name('user.account.details');
+    Route::post('/account-details/update-account',[UserController::class,'account_update'])->name('user.account.update');
 });
 
 Route::middleware(['auth',AuthAdmin::class])->group(function () {
@@ -109,4 +111,5 @@ Route::middleware(['auth',AuthAdmin::class])->group(function () {
     Route::delete('/admin/user/{id}/delete',[AdminController::class,'user_delete'])->name('admin.user.delete');
 
     Route::get('/admin/setting-account',[AdminController::class,'setting'])->name('admin.setting');
+    Route::post('/admin/update-account',[AdminController::class,'setting_update'])->name('admin.setting.update');
 });

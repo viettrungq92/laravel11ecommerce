@@ -644,27 +644,24 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'email' => 'required|email',
-            'phone' => 'required|numeric|digits:10',
+            'mobile' => 'required|numeric|digits:10',
             'old_password' => 'required',
             'new_password' => 'required|confirmed|min:8',
 
         ]);
-        $user = new User();
+        $user = Auth::User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->phone = $request->phone;
+        $user->mobile = $request->mobile;
         // Check old password
         if (!Hash::check($request->old_password, $user->password)) {
             return back()->withErrors(['old_password' => 'Password is wrong.']);
-        }
-        else{
+        }        
             $user->password = Hash::make($request->new_password);
             $user->save();
     
             return back()->with('success', 'The password has been changed successfully!');
-        }
-        // Update password
-        
+
     }
 }
 
