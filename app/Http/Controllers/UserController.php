@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 class UserController extends Controller
 {
@@ -53,27 +54,33 @@ class UserController extends Controller
     public function account_details(){
         return view('user.account-details');
     }
-    public function setting_update(Request $request){
+    public function account_update(Request $request){
         $request->validate([
             'name' => 'required|max:100',
-            'email' => 'required|email',
             'mobile' => 'required|numeric|digits:10',
+            'email' => 'required|email',
             'old_password' => 'required',
             'new_password' => 'required|confirmed|min:8',
 
         ]);
-        $user = Auth::User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->mobile = $request->mobile;
+        $account = Auth::User();
+        $account->name = $request->name;
+        $account->mobile = $request->mobile;
+        $account->email = $request->email;
+
         // Check old password
-        if (!Hash::check($request->old_password, $user->password)) {
+        if (!Hash::check($request->old_password, $account->password)) {
             return back()->withErrors(['old_password' => 'Password is wrong.']);
         }        
-            $user->password = Hash::make($request->new_password);
-            $user->save();
+            $account->password = Hash::make($request->new_password);
+            $account->save();
     
             return back()->with('success', 'The password has been changed successfully!');
 
+    }
+
+    public function show_wishlist(){
+        $items = Cart::instance('wishlist')->content();
+        return view('user.wishlist', compact('items'));
     }
 }

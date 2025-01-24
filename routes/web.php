@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/account-details',[UserController::class,'account_details'])->name('user.account.details');
     Route::post('/account-details/update-account',[UserController::class,'account_update'])->name('user.account.update');
+
+    Route::get('/show-wishlist',[UserController::class,'show_wishlist'])->name('user.wishlist');
 });
 
 Route::middleware(['auth',AuthAdmin::class])->group(function () {

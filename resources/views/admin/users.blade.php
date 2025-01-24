@@ -32,8 +32,8 @@
                     </div>
                 </form>
             </div>
-            <a class="tf-button style-1 w208" href="{{route('admin.brand.add')}}"><i
-                    class="icon-plus"></i>Add new</a>
+            <!-- <a class="tf-button style-1 w208" href="{{route('admin.contacts')}}"><i
+                    class="icon-plus"></i>Add new</a> -->
         </div>
         <div class="wg-table table-all-user">
             <div class="table-responsive">
@@ -56,9 +56,9 @@
                         <tr>
                             <td>{{$user->id}}</td>
                             <td class="pname">
-                                <div class="image">
+                                <!-- <div class="image">
                                     <img src="{{asset('uploads/brands')}}/{{$user->image}}" alt="{{$user->name}}" class="image">
-                                </div>
+                                </div> -->
                                 <div class="name">
                                     <a href="#" class="body-title-2">{{$user->name}}</a>
                                 </div>

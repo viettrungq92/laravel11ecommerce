@@ -349,10 +349,10 @@
               <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">About</a>
+              <a href="{{route('home.about')}}" class="navigation__link">About</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contact</a>
+              <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
             </li>
           </ul>
         </div>
@@ -538,9 +538,9 @@
               <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia" class="logo__image d-block" />
             </a>
           </div>
-          <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-          <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-          <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+          <p class="footer-address">144 Le Van Tho Street, 11 Ward, Go Vap District, HCM </p>
+          <p class="m-0"><strong class="fw-medium">trung.dev24@gmail.com</strong></p>
+          <p><strong class="fw-medium">+84 039-672-7532</strong></p>
 
           <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
             <li>
@@ -590,11 +590,11 @@
         <div class="footer-column footer-menu mb-4 mb-lg-0">
           <h6 class="sub-menu__title text-uppercase">Company</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a></li>
+            <li class="sub-menu__item"><a href="{{route('home.about')}}" class="menu-link menu-link_us-s">About Us</a></li>
             <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
             <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
             <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a></li>
+            <li class="sub-menu__item"><a href="{{route('home.contact')}}" class="menu-link menu-link_us-s">Contact Us</a></li>
           </ul>
         </div>
 
@@ -637,7 +637,7 @@
 
     <div class="footer-bottom">
       <div class="container d-md-flex align-items-center">
-        <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+        <span class="footer-copyright me-auto">©2024 Template</span>
         <div class="footer-settings d-md-flex align-items-center">
           <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
             Conditions</a>
@@ -670,7 +670,7 @@
       </div>
 
       <div class="col-4">
-        <a href="{{ route('home.index') }}" class="footer-mobile__link d-flex flex-column align-items-center">
+        <a href="{{ route('wishlist.index') }}" class="footer-mobile__link d-flex flex-column align-items-center">
           <div class="position-relative">
             <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
               xmlns="http://www.w3.org/2000/svg">
